@@ -16,31 +16,22 @@ Enter the required information below:
 """)
 
 # --- Example Inputs ---
-gender = st.selectbox("Gender", ["Male", "Female"])
-married = st.selectbox("Married", ["Yes", "No"])
-dependents = st.selectbox("Dependents", ["0", "1", "2", "3+"])
-education = st.selectbox("Education", ["Graduate", "Not Graduate"])
-self_employed = st.selectbox("Self Employed", ["Yes", "No"])
+age = st.number_input("Age", min_val = 18)
 applicant_income = st.number_input("Applicant Income", min_value=0)
-coapplicant_income = st.number_input("Coapplicant Income", min_value=0)
 loan_amount = st.number_input("Loan Amount", min_value=0)
-loan_term = st.number_input("Loan Amount Term (in days)", min_value=0)
-credit_history = st.selectbox("Credit History", [1.0, 0.0])
-property_area = st.selectbox("Property Area", ["Urban", "Semiurban", "Rural"])
-
+Credit_score = st.number_input("Credit Score")
+married = st.selectbox("Married", ["Yes", "No"])
+education = st.selectbox("Education", ["Graduate", "Not Graduate"])
+gender = st.selectbox("Gender", ["Male", "Female"])
 # --- Create input dataframe (must match training order) ---
 input_dict = {
-    'Gender': gender,
-    'Married': married,
-    'Dependents': dependents,
-    'Education': education,
-    'Self_Employed': self_employed,
+    'Age' : Age,
     'ApplicantIncome': applicant_income,
-    'CoapplicantIncome': coapplicant_income,
     'LoanAmount': loan_amount,
-    'Loan_Amount_Term': loan_term,
-    'Credit_History': credit_history,
-    'Property_Area': property_area
+    'Credit Score' : Credit_score,
+    'Married': married,
+    'Education': education,
+    'Gender': gender
 }
 
 input_df = pd.DataFrame([input_dict])
@@ -64,3 +55,4 @@ if st.button("Predict Loan Approval"):
         st.error(f"Error while predicting: {e}")
 
 st.markdown("---")
+
