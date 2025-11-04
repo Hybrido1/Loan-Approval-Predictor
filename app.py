@@ -19,7 +19,7 @@ Enter the required information below:
 age = st.number_input("Age", min_val = 18)
 applicant_income = st.number_input("Applicant Income", min_value=0)
 loan_amount = st.number_input("Loan Amount", min_value=0)
-Credit_score = st.number_input("Credit Score")
+Credit_score = st.number_input("Credit Score", min_val = 0)
 married = st.selectbox("Married", ["Yes", "No"])
 education = st.selectbox("Education", ["Graduate", "Not Graduate"])
 gender = st.selectbox("Gender", ["Male", "Female"])
@@ -55,4 +55,5 @@ if st.button("Predict Loan Approval"):
         st.error(f"Error while predicting: {e}")
 
 st.markdown("---")
+
 
