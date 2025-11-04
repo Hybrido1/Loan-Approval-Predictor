@@ -5,7 +5,7 @@ import pandas as pd
 # Load trained model
 
 with open("loan_prediction_model.pkl", "rb") as file:
-model = pickle.load(file)
+    model = pickle.load(file)
 
 st.title("🏦 Loan Approval Predictor App")
 
@@ -64,4 +64,5 @@ prediction = model.predict(input_data)[0]
 except Exception as e:
     st.error(f"Error while predicting: {e}")
 ```
+
 
