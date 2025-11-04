@@ -51,19 +51,17 @@ input_data = pd.DataFrame([input_dict])
 if st.button("Predict Loan Approval"):
     try:
         prediction = model.predict(input_data)[0]
-    
-    ```
+        probability = prediction * 100 if 0 <= prediction <= 1 else prediction
         # Convert to % if value is between 0 and 1
-            probability = prediction * 100 if 0 <= prediction <= 1 else prediction
-    
-            if probability > 55:
-                st.success(f"✅ Loan Approved with {probability:.2f}% confidence.")
-            else:
-                st.error(f"❌ Loan Not Approved ({probability:.2f}% probability).")
-    
+        if probability > 55:
+            st.success(f"✅ Loan Approved with {probability:.2f}% confidence.")
+        else:
+            st.error(f"❌ Loan Not Approved ({probability:.2f}% probability).")
+             
     except Exception as e:
         st.error(f"Error while predicting: {e}")
-```
+
+
 
 
 
