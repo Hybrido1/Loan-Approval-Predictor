@@ -1,34 +1,38 @@
 import streamlit as st
-import pickle
 import pandas as pd
 import numpy as np
+import joblib
 
 # Load trained model
-with open("loan_prediction_model.pkl", "rb") as file:
-    model = pickle.load(file)
+try:
+    model = joblib.load("loan_prediction_model.pkl")
+except Exception as e:
+    st.error(f"Error loading model: {e}")
+    st.stop()
 
 st.set_page_config(page_title="Loan Approval Predictor", page_icon="🏦", layout="centered")
 st.title("🏦 Loan Approval Predictor App")
 
 st.markdown("""
 This app predicts the **probability of your loan getting approved** based on your details.
-Enter the required information below:
+Please enter the following information:
 """)
 
-# --- Example Inputs ---
-age = st.number_input("Age", min_val = 18)
-applicant_income = st.number_input("Applicant Income", min_value=0)
+# --- User Inputs based on actual dataset ---
+age = st.number_input("Age", min_value=18, max_value=100, step=1)
+income = st.number_input("Income", min_value=0)
 loan_amount = st.number_input("Loan Amount", min_value=0)
-Credit_score = st.number_input("Credit Score", min_val = 0)
+credit_score = st.number_input("Credit Score", min_value=300, max_value=900, step=1)
 married = st.selectbox("Married", ["Yes", "No"])
-education = st.selectbox("Education", ["Graduate", "Not Graduate"])
+education = st.selectbox("Education", ["Graduate", "Non-Graduate"])
 gender = st.selectbox("Gender", ["Male", "Female"])
-# --- Create input dataframe (must match training order) ---
+
+# --- Create dataframe for model ---
 input_dict = {
-    'Age' : Age,
-    'ApplicantIncome': applicant_income,
+    'Age': age,
+    'Income': income,
     'LoanAmount': loan_amount,
-    'Credit Score' : Credit_score,
+    'CreditScore': credit_score,
     'Married': married,
     'Education': education,
     'Gender': gender
@@ -36,10 +40,10 @@ input_dict = {
 
 input_df = pd.DataFrame([input_dict])
 
-# --- Predict Section ---
+# --- Prediction Section ---
 if st.button("Predict Loan Approval"):
     try:
-        # If model supports probabilities
+        # Model predicts probability
         if hasattr(model, "predict_proba"):
             probability = model.predict_proba(input_df)[0][1] * 100
         else:
@@ -52,8 +56,4 @@ if st.button("Predict Loan Approval"):
             st.error(f"❌ Loan Not Approved ({probability:.2f}% probability).")
 
     except Exception as e:
-        st.error(f"Error while predicting: {e}")
-
-st.markdown("---")
-
-
+        st.error(f"Error during prediction: {e}")
