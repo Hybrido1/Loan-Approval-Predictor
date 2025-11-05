@@ -32,19 +32,19 @@ self_employed = st.selectbox("Self_employed", ["Yes", "No"])
 education = st.selectbox("Education", ["Graduate", "Non-Graduate"])
 
 # --- Create dataframe for model ---
-input_dict = {
-    'Number of dependents': no_of_dependents,
-    'Income Annum': income_annum,
-    'Loan Amount': loan_amount,
-    'Loan Term': loan_term,
-    'Cibil Score': cibil_score,
-    'Residential Assets Value': residential_assets_value,
-    'Commercial Assets Value': commercial_assets_value,
-    'Luxury Assets Value' : luxury_assets_value,
-    'Bank Asset Value' : bank_asset_value,
-    'Self Employed' : self_employed,
-    'Education' : education
-}
+input_data =pd.Dataframe({
+    'Number of dependents': [no_of_dependents],
+    'Income Annum': [income_annum],
+    'Loan Amount': [loan_amount],
+    'Loan Term': [loan_term],
+    'Cibil Score': [cibil_score],
+    'Residential Assets Value': [residential_assets_value],
+    'Commercial Assets Value': [commercial_assets_value],
+    'Luxury Assets Value' : [luxury_assets_value],
+    'Bank Asset Value' : [bank_asset_value],
+    'Self Employed' : [self_employed],
+    'Education' : [education]
+})
 
 input_df = pd.DataFrame([input_dict])
 
@@ -65,5 +65,6 @@ if st.button("Predict Loan Approval"):
 
     except Exception as e:
         st.error(f"Error during prediction: {e}")
+
 
 
