@@ -11,7 +11,7 @@ except Exception as e:
     st.stop()
 
 st.set_page_config(page_title="Loan Approval Predictor", page_icon="🏦", layout="centered")
-st.title("🏦 Loan Approval Predictor App")
+st.title("Loan Approval Predictor App")
 
 st.markdown("""
 This app predicts the **probability of your loan getting approved** based on your details.
@@ -19,23 +19,31 @@ Please enter the following information:
 """)
 
 # --- User Inputs based on actual dataset ---
-age = st.number_input("Age", min_value=18, max_value=100, step=1)
-income = st.number_input("Income", min_value=0)
+no_of_dependents = st.number_input("Number of dependents", min_value=18, max_value=100, step=1)
+income_annum = st.number_input("Income Annum", min_value=0)
 loan_amount = st.number_input("Loan Amount", min_value=0)
-credit_score = st.number_input("Credit Score", min_value=300, max_value=900, step=1)
-married = st.selectbox("Married", ["Yes", "No"])
+loan_term = st.number_input("Loan Term", min_value=300, max_value=900, step=1)
+cibil_score = st.number_input("Cibil Score", min_value = 0)
+residential_assets_value = st.number_input("Residential Assets Value", min_value = 0)
+commercial_assets_value  = st.number_input("Commercial Assets Value", min_value = 0)
+luxury_assets_value = st.number_input("Luxury Assets Value", min_value = 0)
+bank_asset_value = st.number_input("Bank Asset Value", min_value  = 0)
+self_employed = st.selectbox("Self_employed", ["Yes", "No"])
 education = st.selectbox("Education", ["Graduate", "Non-Graduate"])
-gender = st.selectbox("Gender", ["Male", "Female"])
 
 # --- Create dataframe for model ---
 input_dict = {
-    'Age': age,
-    'Income': income,
-    'LoanAmount': loan_amount,
-    'CreditScore': credit_score,
-    'Married': married,
-    'Education': education,
-    'Gender': gender
+    'Number of dependents': no_of_dependents,
+    'Income Annum': income_annum,
+    'Loan Amount': loan_amount,
+    'Loan Term': loan_term,
+    'Cibil Score': cibil_score,
+    'Residential Assets Value': residential_assets_value,
+    'Commercial Assets Value': commercial_assets_value,
+    'Luxury Assets Value' : luxury_assets_value,
+    'Bank Asset Value' : bank_asset_value,
+    'Self Employed' : self_employed,
+    'Education' : education
 }
 
 input_df = pd.DataFrame([input_dict])
@@ -57,3 +65,4 @@ if st.button("Predict Loan Approval"):
 
     except Exception as e:
         st.error(f"Error during prediction: {e}")
+
