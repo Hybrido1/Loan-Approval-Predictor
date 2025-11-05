@@ -46,7 +46,7 @@ input_data =pd.DataFrame({
     'Education' : [education]
 })
 
-input_df = pd.DataFrame([input_dict])
+input_df = pd.DataFrame([input_data])
 
 # --- Prediction Section ---
 if st.button("Predict Loan Approval"):
@@ -65,6 +65,7 @@ if st.button("Predict Loan Approval"):
 
     except Exception as e:
         st.error(f"Error during prediction: {e}")
+
 
 
 
