@@ -22,8 +22,8 @@ Please enter the following information:
 no_of_dependents = st.number_input("Number of dependents", min_value=0, max_value=10, step=1)
 income_annum = st.number_input("Income Annum", min_value=0)
 loan_amount = st.number_input("Loan Amount", min_value=0)
-loan_term = st.number_input("Loan Term", min_value=300, max_value=900, step=1)
-cibil_score = st.number_input("Cibil Score", min_value = 0)
+loan_term = st.number_input("Loan Term", min_value=2, max_value=20, step=1)
+cibil_score = st.number_input("Cibil Score", min_value =300, max_value = 900, step = 1 )
 residential_assets_value = st.number_input("Residential Assets Value", min_value = 0)
 commercial_assets_value  = st.number_input("Commercial Assets Value", min_value = 0)
 luxury_assets_value = st.number_input("Luxury Assets Value", min_value = 0)
@@ -65,6 +65,7 @@ if st.button("Predict Loan Approval"):
 
     except Exception as e:
         st.error(f"Error during prediction: {e}")
+
 
 
 
