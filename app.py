@@ -32,7 +32,7 @@ self_employed = st.selectbox("Self_employed", ["Yes", "No"])
 education = st.selectbox("Education", ["Graduate", "Non-Graduate"])
 
 # --- Create dataframe for model ---
-input_data =pd.Dataframe({
+input_data =pd.DataFrame({
     'Number of dependents': [no_of_dependents],
     'Income Annum': [income_annum],
     'Loan Amount': [loan_amount],
@@ -65,6 +65,7 @@ if st.button("Predict Loan Approval"):
 
     except Exception as e:
         st.error(f"Error during prediction: {e}")
+
 
 
 
